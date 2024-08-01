@@ -134,4 +134,66 @@ class Anim(Scene):
         # self.wait()
         # self.play(AnimationGroup(*eq_writing, lag_ratio=0.5), run_time=2)
         # self.wait()
+
+
+class Dial(ThreeDScene):
+    def construct(self):
+        # Create a circle
+        circle = Circle(radius=3, color=WHITE)
+        circle.rotate_about_origin(90*DEGREES, RIGHT)
+        circle.rotate_about_origin(-90*DEGREES, UP)
+        # self.add(circle)
+        dial = Group()
+
+        # Parameters
+        num_numbers = 21
+        angle_increment = 360 / num_numbers
+
+        for i in range(num_numbers):
+            angle = i * angle_increment
+            number = Text(str(i + 1))
+            if i == num_numbers-1:
+                number = Text("")
+            
+            # Position the number on the circle
+            number.move_to(circle.point_from_proportion((num_numbers-i) / num_numbers))
+            
+            # Rotate the number to face radially outwards
+            number.rotate(angle * DEGREES, UP)
+            
+            
+
+            dial.add(number)
+
+        dial.move_to(ORIGIN, OUT)
+
+        black_screen = Square(2)
+        black_screen.set_color(RED)
+        black_screen.set_fill(RED, opacity=1)
+        black_screen.move_to(ORIGIN+2*IN)
+
+        self.add(black_screen)
+        self.add(dial)
         
+        self.set_camera_orientation(phi=0*DEGREES - 30*DEGREES, theta=-90*DEGREES)
+        self.wait()
+        self.set_camera_orientation(phi=0*DEGREES, theta=-90*DEGREES)
+        self.wait()
+        # self.play(Rotate(dial, (-360*DEGREES) + (2*360/21 * DEGREES), UP), run_time=5)
+
+
+# # Set opacity based on the number
+            # if i == 0:  # Number 1
+            #     number.set_opacity(1)
+            # elif i == 1:  # Number 2
+            #     # number.set_opacity(0.5)
+            #     # Create a gradient for number 2
+            
+            #     number.set_color_by_gradient([WHITE.to_int_rgba_with_alpha(0.75), WHITE.to_int_rgba_with_alpha(0.25)])
+            # else:
+            #     number.set_opacity(0)
+            # if i > 5:
+            #     number.set_opacity(0)
+
+            # if i in range(10, 16):
+            #     number.set_opacity(1)
