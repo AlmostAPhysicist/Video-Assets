@@ -197,3 +197,24 @@ class Dial(ThreeDScene):
 
             # if i in range(10, 16):
             #     number.set_opacity(1)
+
+
+
+class Beauty(Scene):
+    def construct(self):
+        # self.camera.background_color = WHITE
+        line = Line(DOWN*2, DOWN)
+        self.wait()
+        self.play(Create(line))
+        self.wait()
+        circle = Circle()
+        self.play(ReplacementTransform(line, circle))
+        self.wait()
+
+        # svg = SVGMobject("devil.svg")
+        # self.wait()
+        # self.play(Write(svg), run_time=3, rate_func=rate_functions.ease_in_out_quad)
+        # self.wait()
+
+
+
